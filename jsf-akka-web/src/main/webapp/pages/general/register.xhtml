@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"    
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"     
+      xmlns:jsf="http://xmlns.jcp.org/jsf"    
+      xmlns:passthrough="http://xmlns.jcp.org/jsf/passthrough"     
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"> 
+
+    <h:body>
+        <f:view contracts="default" transient="false">
+            <ui:composition template="/template.xhtml">   
+
+                <ui:define name="content">
+                    <h:form class="form-horizontal">
+                        <div class="container">
+                            <br/>
+                            <hr/>
+                            <p:growl/>
+                            <div class="row">
+                                <div class="col-md-6 col-md-offset-3">
+                                    <div class="well well-sm">
+
+                                        <fieldset>
+                                            <legend class="text-center">Register user</legend>
+
+                                            <!-- Name input-->
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label" for="firstname">Firstname</label>
+                                                <div class="col-md-9">
+                                                    <input id="firstname" name="firstname" type="text" placeholder="firstname" jsf:value="#{registerUser.user.firstname}"  jsf:required="true" class="form-control"/>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label" for="lastname">Lastname</label>
+                                                <div class="col-md-9">
+                                                    <input id="lastname" name="lastname" type="text" placeholder="lastname" jsf:value="#{registerUser.user.lastname}"  jsf:required="true" class="form-control"/>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label" for="email">E-mail</label>
+                                                <div class="col-md-9">
+                                                    <input id="email" name="email" type="text" placeholder="email" jsf:value="#{registerUser.user.email}"  jsf:required="true" class="form-control"/>
+                                                </div>
+                                            </div>
+
+
+
+                                            <!-- Form actions -->
+                                            <div class="form-group">
+                                                <div class="col-md-12 text-right">
+                                                    <button type="submit" jsf:action="#{registerUser.send()}" class="btn btn-primary btn-lg">Click and wait</button>
+                                                    <button type="submit" jsf:action="clear" jsf:immediate="true" class="btn btn-danger btn-lg">Clear form</button>
+
+                                                </div>
+                                            </div>
+                                        </fieldset>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <hr/>
+                            <div class="row">
+                                <center>                                  
+                                    <p:poll interval="3"  update="akkadata" />
+                                    <h2>Table will updated every 3 seconds</h2>
+                                    <button type="submit" jsf:action="#{finalBean.doDrop()}" jsf:immediate="true" class="btn btn-danger btn-lg">Clear user db</button>
+                                    <hr/>
+                                    <p:dataTable styleClass="table table-striped" style="width:800px"
+                                                 id="akkadata" var="list" value="#{finalBean.userList}" rows="150">
+
+                                        <p:column headerText="Firstname">
+                                            <h:outputText value="#{list.firstname}"/>
+                                        </p:column>
+                                        <p:column headerText="Lastname">
+                                            <h:outputText value="#{list.lastname}"/>
+                                        </p:column>
+                                        <p:column headerText="E-mail">
+                                            <h:outputText value="#{list.email}"/>
+                                        </p:column>
+                                        <p:column headerText="Send date">
+                                            <h:outputText value="#{list.sendDate}"/>
+                                        </p:column>
+                                        <p:column headerText="Registered date">
+                                            <h:outputText value="#{list.registeredDate}"/>
+                                        </p:column>
+                                    </p:dataTable>
+                                </center>
+                            </div>
+                        </div>
+                    </h:form>
+                </ui:define>
+            </ui:composition>
+        </f:view>
+    </h:body>
+</html>
+
