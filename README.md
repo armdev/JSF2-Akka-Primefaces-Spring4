@@ -1,4 +1,5 @@
 akka java web application
+
 # JSF2-Akka-Primefaces-Spring4 + MongoDB + Apache Tomcat 8
 JSF2.2, Spring4, Akka and MongoDB integrated project, using also primefaces.
 Just deploy web project with mongomapper, run mongodb, and run project under tomcat 8.
